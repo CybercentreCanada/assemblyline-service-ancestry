@@ -1,0 +1,41 @@
+name: Ancestry
+version: $SERVICE_TAG
+description: This service analyzes the genealogy of a file
+accepts: .*
+rejects: empty|metadata/.*
+
+stage: REVIEW
+category: Static Analysis
+
+file_required: false
+timeout: 300
+disable_cache: true
+
+enabled: true
+is_external: false
+licence_count: 0
+uses_tags: false
+uses_tag_scores: false
+uses_metadata: false
+uses_temp_submission_data: true
+
+config:
+  signatures:
+    "archive/zip,ROOT\|text/plain,EXTRACTED": 1000
+
+heuristics:
+  - name: "Malicious Legacy"
+    heur_id: 1
+    score: 1000
+    description: "Malicous Genealogy"
+    filetype: "*"
+  - name: "Suspicious Legacy"
+    heur_id: 2
+    score: 300
+    description: "Suspicious Genealogy"
+    filetype: "*"
+
+docker_config:
+  image: ${REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
+  cpu_cores: 1
+  ram_mb: 512
