@@ -7,9 +7,11 @@ Signature-based Assemblyline service that focuses on file genealogy
 (BETA) Signatures are defined as service configuration and each signature follows the following format:
 
 ```yaml
-name: "signature_name"
-pattern: "$regex.*"
-score: 0
+config:
+  signatures:
+    exe_from_office_document: # Signature name
+      pattern: "document/office/.+,ROOT\\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED" # Regex pattern
+      score: 1000 # Score associated to signature hit
 ```
 
 Depending on the capabilities we want this service to have, this will be prone change when ready for production.
