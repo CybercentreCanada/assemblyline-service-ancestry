@@ -21,21 +21,18 @@ uses_temp_submission_data: true
 
 config:
   signatures:
-    "archive/zip,ROOT\|text/plain,EXTRACTED": 1000
+    exe_from_office_document:
+      pattern: "document/office/.+,ROOT\\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED"
+      score: 1000
 
 heuristics:
-  - name: "Malicious Legacy"
+  - name: "Legacy Signature Hit"
     heur_id: 1
-    score: 1000
-    description: "Malicous Genealogy"
-    filetype: "*"
-  - name: "Suspicious Legacy"
-    heur_id: 2
-    score: 300
-    description: "Suspicious Genealogy"
+    score: 0 # Score dictated by signatures
+    description: "Signature Hit on Genealogy"
     filetype: "*"
 
 docker_config:
-  image: ${REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
+  image: ${PRIVATE_REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
   cpu_cores: 1
   ram_mb: 512
