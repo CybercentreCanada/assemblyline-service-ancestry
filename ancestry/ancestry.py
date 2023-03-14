@@ -1,6 +1,8 @@
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.request import ServiceRequest
 from assemblyline_v4_service.common.result import Heuristic, Result, ResultTimelineSection
+from assemblyline.common.uid import get_id_from_data, SHORT
+
 
 from ancestry.icon_map import AL_TYPE_ICON
 
@@ -68,20 +70,27 @@ class Ancestry(ServiceBase):
             chain = [AncestryNode(**ancester) for ancester in ancestry]
             tag = '|'.join([str(node)for node in chain])
             # Workaround for caching issue
-            request.set_service_context(f"Ancestry: {tag}")
+            request.set_service_context(f"Ancestry: {get_id_from_data(tag, length=SHORT)}")
 
             title = ' → '.join([c.file_type.split('/')[-1].upper() for c in chain])
             timeline_result_section = ResultTimelineSection(title_text=title, tags={'file.ancestry': [tag]})
 
             # Iterate over detection signatures and start scoring ancestry nodes
-            heur = Heuristic(1)
+            heur = None
             for sig_name, sig_details in self.config.get('signatures', {}).items():
                 signature = AncestrySignature(name=sig_name, **sig_details)
                 for match in re.finditer(signature.pattern, tag):
                     self.log.debug(f'MATCH: {signature} on {tag}')
-                    heur.add_signature_id(signature=signature.name, score=signature.score)
                     match_group = match.group()
                     matched_group = tag.replace(match_group, f"**{match_group}**")
+
+                    if not heur and match_group == tag:
+                        heur = Heuristic(1)
+                        timeline_result_section.add_tag('file.rule.ancestry', signature.name)
+
+                    if heur:
+                        heur.add_signature_id(signature=signature.name, score=signature.score)
+
                     score_node = False
                     for i, node in enumerate(matched_group.split('|')):
 
@@ -94,13 +103,13 @@ class Ancestry(ServiceBase):
 
                         if node.endswith("**"):
                             score_node = False
-                    timeline_result_section.add_tag('file.rule.ancestry', signature.name)
 
             [timeline_result_section.add_node(**c.to_timeline_node()) for c in chain]
             timeline_result_section.set_heuristic(heur)
             result.add_section(timeline_result_section)
 
-        for ancestry in request.task.temp_submission_data['ancestry']:
-            add_to_section(result, ancestry)
+        if request.task.depth > 0:
+            for ancestry in request.task.temp_submission_data['ancestry']:
+                add_to_section(result, ancestry)
 
         request.result = result
