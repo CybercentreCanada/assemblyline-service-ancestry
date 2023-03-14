@@ -33,6 +33,6 @@ heuristics:
     filetype: "*"
 
 docker_config:
-  image: ${PRIVATE_REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
+  image: ${REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
   cpu_cores: 1
   ram_mb: 512
