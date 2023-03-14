@@ -26,10 +26,10 @@ config:
       score: 1000
 
 heuristics:
-  - name: "Legacy Signature Hit"
+  - name: "Suspicious File Ancestry"
     heur_id: 1
     score: 0 # Score dictated by signatures
-    description: "Signature Hit on Genealogy"
+    description: "Signature hit on genealogy of current file"
     filetype: "*"
 
 docker_config:

@@ -86,7 +86,7 @@ class Ancestry(ServiceBase):
 
                     if not heur and match_group == tag:
                         heur = Heuristic(1)
-                        timeline_result_section.add_tag('file.rule.ancestry', signature.name)
+                        # timeline_result_section.add_tag('file.rule.ancestry', signature.name)
 
                     if heur:
                         heur.add_signature_id(signature=signature.name, score=signature.score)
