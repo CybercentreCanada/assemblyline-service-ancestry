@@ -21,10 +21,11 @@ class AncestrySignature:
 
 
 class AncestryNode(object):
-    def __init__(self, type=None, parent_relation=None, *args, **kwargs):
+    def __init__(self, sha256, type=None, parent_relation=None, *args, **kwargs):
         self.file_type = type
         self.parent_relation = parent_relation
         self.score = 0
+        self.sha256 = sha256
         self.signatures: List[AncestrySignature] = []
 
     def add_signature(self, signature: AncestrySignature):
@@ -34,14 +35,14 @@ class AncestryNode(object):
     def __str__(self):
         return f"{self.file_type},{self.parent_relation}"
 
-    def to_timeline_node(self) -> Dict:
+    def to_timeline_node(self, sha256_URL_lookup: Dict[str, str]) -> Dict:
         icon, content = None, None
 
-        # Detemine content
+        # Pre-determined content, otherwise undocumented
         if self.parent_relation == "EXTRACTED":
             content = "from parent file"
         elif self.parent_relation == "DOWNLOADED":
-            content = "from url: {insert_url}"
+            content = f"from url: {sha256_URL_lookup.get(self.sha256, 'origin unknown')}"
 
         # Detemine icon
         for pattern, icon in AL_TYPE_ICON.items():
@@ -65,6 +66,8 @@ class Ancestry(ServiceBase):
 
     def execute(self, request: ServiceRequest) -> None:
         result = Result()
+        sha256_URL_lookup = {sha256: url
+                             for url, sha256 in request.temp_submission_data.get('visited_urls', {}).items()}
 
         def add_to_section(result: Result, ancestry: list):
             chain = [AncestryNode(**ancester) for ancester in ancestry]
@@ -104,7 +107,7 @@ class Ancestry(ServiceBase):
                         if node.endswith("**"):
                             score_node = False
 
-            [timeline_result_section.add_node(**c.to_timeline_node()) for c in chain]
+            [timeline_result_section.add_node(**c.to_timeline_node(sha256_URL_lookup)) for c in chain]
             timeline_result_section.set_heuristic(heur)
             result.add_section(timeline_result_section)
 
