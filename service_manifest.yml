@@ -8,8 +8,9 @@ stage: REVIEW
 category: Static Analysis
 
 file_required: false
-timeout: 300
+timeout: 60
 disable_cache: true
+privileged: true
 
 enabled: true
 is_external: false
@@ -22,8 +23,17 @@ uses_temp_submission_data: true
 config:
   signatures:
     exe_from_office_document:
-      pattern: "document/office/.+,ROOT\\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED"
-      score: 1000
+      pattern: document/office/\w+,\w+(\|[a-z0-9/]+,\w+)*\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED
+      score: 500
+    exe_from_code:
+      pattern: code/\w+,\w+(\|[a-z0-9/]+,\w+)*\|(executable/windows/(?:pe|dll)(?:32|64)|shortcut/\w+),\w+
+      score: 500
+    onenote_to_passwordprotected_archive:
+      pattern: document/office/onenote,\w+\|code/html,\w+\|archive/\w+,\w+
+      score: 500
+    exe_from_unknown:
+      pattern: unknown,\w+(\|[a-z0-9/]+,\w+)*\|(executable/windows/(?:pe|dll)(?:32|64)|code/(ps1|batch)|shortcut/\w+),\w+
+      score: 500
 
 heuristics:
   - name: "Suspicious File Ancestry"
