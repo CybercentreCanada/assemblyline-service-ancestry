@@ -80,12 +80,21 @@ class Ancestry(ServiceBase):
 
             # Iterate over detection signatures and start scoring ancestry nodes
             heur = None
+            ancestry_chain = [(node.file_type, node.parent_relation) for node in chain]
             for sig_name, sig_details in self.config.get('signatures', {}).items():
                 signature = AncestrySignature(name=sig_name, **sig_details)
                 for match in re.finditer(signature.pattern, tag):
                     self.log.debug(f'MATCH: {signature} on {tag}')
                     match_group = match.group()
                     matched_group = tag.replace(match_group, f"**{match_group}**")
+
+                    # Ensure matched group is a subset of the ancestry chain
+                    match_chain = [tuple(node.split(',')) for node in match_group.split('|')]
+
+                    if len(ancestry_chain) > len(match_chain) and match_chain not in ancestry_chain:
+                        continue
+                    elif len(ancestry_chain) == len(match_chain) and match_chain != ancestry_chain:
+                        continue
 
                     if not heur and match_group == tag:
                         heur = Heuristic(1)
