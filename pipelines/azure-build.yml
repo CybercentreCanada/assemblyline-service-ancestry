@@ -68,12 +68,14 @@ stages:
             displayName: Test containers
           - script: |
               export TAG=${BUILD_SOURCEBRANCH#"refs/tags/v"}
+              export SERIES="`expr $TAG : '\([0-9]\+\.[0-9]\+\.\)'`${BUILD_TYPE}"
               if [[ "$TAG" == *stable* ]]; then export BUILD_TYPE=stable; else export BUILD_TYPE=latest; fi
 
               for IMAGE in "cccs/" "uchimera.azurecr.io/cccs/"
               do
                 docker tag cccs/${BUILD_REPOSITORY_NAME##*/}:$BUILD_TYPE ${IMAGE}${BUILD_REPOSITORY_NAME##*/}:$TAG
                 docker tag cccs/${BUILD_REPOSITORY_NAME##*/}:$BUILD_TYPE ${IMAGE}${BUILD_REPOSITORY_NAME##*/}:$BUILD_TYPE
+                docker tag cccs/${BUILD_REPOSITORY_NAME##*/}:$BUILD_TYPE ${IMAGE}${BUILD_REPOSITORY_NAME##*/}:$SERIES
                 docker push ${IMAGE}${BUILD_REPOSITORY_NAME##*/} --all-tags
               done
             displayName: Deploy to container repositories
