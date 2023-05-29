@@ -1,13 +1,11 @@
+import re
+from typing import Dict, List
+
+from ancestry.icon_map import AL_TYPE_ICON
+from assemblyline.common.uid import SHORT, get_id_from_data
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.request import ServiceRequest
 from assemblyline_v4_service.common.result import Heuristic, Result, ResultTimelineSection
-from assemblyline.common.uid import get_id_from_data, SHORT
-
-
-from ancestry.icon_map import AL_TYPE_ICON
-
-import re
-from typing import Dict, List
 
 
 class AncestrySignature:
