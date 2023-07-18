@@ -34,6 +34,12 @@ config:
     exe_from_unknown:
       pattern: unknown,\w+(\|[a-z0-9/]+,\w+)*\|(executable/windows/(?:pe|dll)(?:32|64)|code/(ps1|batch)|shortcut/\w+),\w+
       score: 500
+    ps1_from_javascript:
+      pattern: code/(?:javascript|html|hta),\w+(\|[a-z0-9/]+,\w+)*\|code/ps1,\w+
+      score: 500
+    code_from_jscript_from_office_document:
+      pattern: document/office/\w+,\w+\|.*\|code/(batch|javascript|jscript|vbe|ps1|wsf|wsc),EXTRACTED
+      score: 500
 
 heuristics:
   - name: "Suspicious File Ancestry"
