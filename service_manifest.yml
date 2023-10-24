@@ -2,7 +2,7 @@ name: Ancestry
 version: $SERVICE_TAG
 description: This service analyzes the genealogy of a file
 accepts: .*
-rejects: empty|metadata/.*
+rejects: empty|metadata/.*|uri/.*
 
 stage: REVIEW
 category: Static Analysis
