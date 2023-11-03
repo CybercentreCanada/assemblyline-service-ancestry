@@ -49,12 +49,12 @@ class AncestryNode(object):
                 break
 
         return {
-            'title': self.parent_relation,
-            'content': content,
-            'opposite_content': self.file_type,
-            'icon': icon,
-            'signatures': self.signatures,
-            'score': self.score
+            "title": self.parent_relation,
+            "content": content,
+            "opposite_content": self.file_type,
+            "icon": icon,
+            "signatures": self.signatures,
+            "score": self.score,
         }
 
 
@@ -64,30 +64,31 @@ class Ancestry(ServiceBase):
 
     def execute(self, request: ServiceRequest) -> None:
         result = Result()
-        sha256_URL_lookup = {sha256: url
-                             for url, sha256 in request.temp_submission_data.get('visited_urls', {}).items()}
+        sha256_URL_lookup = {
+            sha256: url for url, sha256 in request.temp_submission_data.get("visited_urls", {}).items()
+        }
 
         def add_to_section(result: Result, ancestry: list):
             chain = [AncestryNode(**ancester) for ancester in ancestry]
-            tag = '|'.join([str(node)for node in chain])
+            tag = "|".join([str(node) for node in chain])
             # Workaround for caching issue
             request.set_service_context(f"Ancestry: {get_id_from_data(tag, length=SHORT)}")
 
-            title = ' → '.join([c.file_type.split('/')[-1].upper() for c in chain])
-            timeline_result_section = ResultTimelineSection(title_text=title, tags={'file.ancestry': [tag]})
+            title = " → ".join([c.file_type.split("/")[-1].upper() for c in chain])
+            timeline_result_section = ResultTimelineSection(title_text=title, tags={"file.ancestry": [tag]})
 
             # Iterate over detection signatures and start scoring ancestry nodes
             heur = None
             ancestry_chain = [(node.file_type, node.parent_relation) for node in chain]
-            for sig_name, sig_details in self.config.get('signatures', {}).items():
+            for sig_name, sig_details in self.config.get("signatures", {}).items():
                 signature = AncestrySignature(name=sig_name, **sig_details)
                 for match in re.finditer(signature.pattern, tag):
-                    self.log.debug(f'MATCH: {signature} on {tag}')
+                    self.log.debug(f"MATCH: {signature} on {tag}")
                     match_group = match.group()
                     matched_group = tag.replace(match_group, f"**{match_group}**")
 
                     # Ensure matched group is a subset of the ancestry chain
-                    match_chain = [tuple(node.split(',')) for node in match_group.split('|')]
+                    match_chain = [tuple(node.split(",")) for node in match_group.split("|")]
 
                     if len(ancestry_chain) > len(match_chain) and match_chain not in ancestry_chain:
                         continue
@@ -102,8 +103,7 @@ class Ancestry(ServiceBase):
                         heur.add_signature_id(signature=signature.name, score=signature.score)
 
                     score_node = False
-                    for i, node in enumerate(matched_group.split('|')):
-
+                    for i, node in enumerate(matched_group.split("|")):
                         # Use double asterisk as an on/off switch for scoring subgroups of chain
                         if node.startswith("**"):
                             score_node = True
@@ -119,7 +119,7 @@ class Ancestry(ServiceBase):
             result.add_section(timeline_result_section)
 
         if request.task.depth > 0:
-            for ancestry in request.task.temp_submission_data['ancestry']:
+            for ancestry in request.task.temp_submission_data["ancestry"]:
                 add_to_section(result, ancestry)
 
         request.result = result
