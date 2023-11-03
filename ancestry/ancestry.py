@@ -6,6 +6,7 @@ from assemblyline.common.uid import SHORT, get_id_from_data
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.request import ServiceRequest
 from assemblyline_v4_service.common.result import Heuristic, Result, ResultTimelineSection
+from assemblyline_v4_service.common.task import PARENT_RELATION
 
 
 class AncestrySignature:
@@ -37,9 +38,9 @@ class AncestryNode(object):
         icon, content = None, None
 
         # Pre-determined content, otherwise undocumented
-        if self.parent_relation == "EXTRACTED":
+        if self.parent_relation == PARENT_RELATION.EXTRACTED:
             content = "from parent file"
-        elif self.parent_relation == "DOWNLOADED":
+        elif self.parent_relation == PARENT_RELATION.DOWNLOADED:
             content = f"from url: {sha256_URL_lookup.get(self.sha256, 'origin unknown')}"
 
         # Detemine icon
