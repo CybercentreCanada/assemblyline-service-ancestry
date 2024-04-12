@@ -40,6 +40,9 @@ config:
     code_from_jscript_from_office_document:
       pattern: document/office/\w+,\w+\|.*\|code/(batch|javascript|jscript|vbe|ps1|wsf|wsc),EXTRACTED
       score: 500
+    archive_from_javascript:
+      pattern: code/(javascript|jscript|html|hta|wsf|wsc),\w+\|archive/\w+,EXTRACTED
+      score: 500
 
 heuristics:
   - name: "Suspicious File Ancestry"
