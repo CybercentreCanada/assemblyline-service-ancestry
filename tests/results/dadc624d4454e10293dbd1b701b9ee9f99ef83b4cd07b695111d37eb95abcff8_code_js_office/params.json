@@ -11,7 +11,7 @@
                 {
                     "sha256": "b9b248e46e8e2fcee1ea540e9be11748e06c3d6cbf24861978a862c444ed97a2",
                     "type": "code/batch/document",
-                    "parent_relation": "DROPPED"
+                    "parent_relation": "DOWNLOADED"
                 },
                 {
                     "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1541",

@@ -7,14 +7,14 @@
         "auto_collapse": false,
         "body": [
           {
-            "content": null,
+            "content": "from url: origin unknown",
             "icon": "CODE",
             "opposite_content": "code/javascript",
             "score": 500,
             "signatures": [
               "ps1_from_javascript"
             ],
-            "title": "DROPPED"
+            "title": "DOWNLOADED"
           },
           {
             "content": "from parent file",
@@ -47,7 +47,7 @@
         "tags": {
           "file": {
             "ancestry": [
-              "code/javascript,DROPPED|code/ps1,EXTRACTED"
+              "code/javascript,DOWNLOADED|code/ps1,EXTRACTED"
             ]
           }
         },
@@ -77,7 +77,7 @@
           "signatures": [
             "ps1_from_javascript"
           ],
-          "value": "code/javascript,DROPPED|code/ps1,EXTRACTED"
+          "value": "code/javascript,DOWNLOADED|code/ps1,EXTRACTED"
         }
       ]
     },
@@ -85,7 +85,7 @@
       "ancestry": [
         [
           {
-            "parent_relation": "DROPPED",
+            "parent_relation": "DOWNLOADED",
             "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
             "type": "code/javascript"
           },

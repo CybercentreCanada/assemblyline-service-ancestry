@@ -7,14 +7,14 @@
         "auto_collapse": false,
         "body": [
           {
-            "content": null,
+            "content": "from url: origin unknown",
             "icon": "DOCUMENT",
             "opposite_content": "document/office/onenote",
             "score": 500,
             "signatures": [
               "onenote_to_passwordprotected_archive"
             ],
-            "title": "DROPPED"
+            "title": "DOWNLOADED"
           },
           {
             "content": "from parent file",
@@ -57,7 +57,7 @@
         "tags": {
           "file": {
             "ancestry": [
-              "document/office/onenote,DROPPED|code/html,EXTRACTED|archive/html,EXTRACTED"
+              "document/office/onenote,DOWNLOADED|code/html,EXTRACTED|archive/html,EXTRACTED"
             ]
           }
         },
@@ -87,7 +87,7 @@
           "signatures": [
             "onenote_to_passwordprotected_archive"
           ],
-          "value": "document/office/onenote,DROPPED|code/html,EXTRACTED|archive/html,EXTRACTED"
+          "value": "document/office/onenote,DOWNLOADED|code/html,EXTRACTED|archive/html,EXTRACTED"
         }
       ]
     },
@@ -95,7 +95,7 @@
       "ancestry": [
         [
           {
-            "parent_relation": "DROPPED",
+            "parent_relation": "DOWNLOADED",
             "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
             "type": "document/office/onenote"
           },

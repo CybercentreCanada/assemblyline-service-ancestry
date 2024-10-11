@@ -17,14 +17,14 @@
             "title": "EXTRACTED"
           },
           {
-            "content": null,
+            "content": "from url: origin unknown",
             "icon": "CODE",
             "opposite_content": "code/batch/document",
             "score": 500,
             "signatures": [
               "code_from_jscript_from_office_document"
             ],
-            "title": "DROPPED"
+            "title": "DOWNLOADED"
           },
           {
             "content": "from parent file",
@@ -57,7 +57,7 @@
         "tags": {
           "file": {
             "ancestry": [
-              "document/office/html,EXTRACTED|code/batch/document,DROPPED|code/batch,EXTRACTED"
+              "document/office/html,EXTRACTED|code/batch/document,DOWNLOADED|code/batch,EXTRACTED"
             ]
           }
         },
@@ -87,7 +87,7 @@
           "signatures": [
             "code_from_jscript_from_office_document"
           ],
-          "value": "document/office/html,EXTRACTED|code/batch/document,DROPPED|code/batch,EXTRACTED"
+          "value": "document/office/html,EXTRACTED|code/batch/document,DOWNLOADED|code/batch,EXTRACTED"
         }
       ]
     },
@@ -100,7 +100,7 @@
             "type": "document/office/html"
           },
           {
-            "parent_relation": "DROPPED",
+            "parent_relation": "DOWNLOADED",
             "sha256": "b9b248e46e8e2fcee1ea540e9be11748e06c3d6cbf24861978a862c444ed97a2",
             "type": "code/batch/document"
           },

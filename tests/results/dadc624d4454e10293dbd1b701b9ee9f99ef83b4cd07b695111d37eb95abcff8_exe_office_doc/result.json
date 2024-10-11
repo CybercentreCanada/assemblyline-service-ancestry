@@ -7,14 +7,14 @@
         "auto_collapse": false,
         "body": [
           {
-            "content": null,
+            "content": "from url: origin unknown",
             "icon": "DOCUMENT",
             "opposite_content": "document/office/javascript",
             "score": 500,
             "signatures": [
               "exe_from_office_document"
             ],
-            "title": "DROPPED"
+            "title": "DOWNLOADED"
           },
           {
             "content": "from parent file",
@@ -47,7 +47,7 @@
         "tags": {
           "file": {
             "ancestry": [
-              "document/office/javascript,DROPPED|executable/windows/dll64,EXTRACTED"
+              "document/office/javascript,DOWNLOADED|executable/windows/dll64,EXTRACTED"
             ]
           }
         },
@@ -77,7 +77,7 @@
           "signatures": [
             "exe_from_office_document"
           ],
-          "value": "document/office/javascript,DROPPED|executable/windows/dll64,EXTRACTED"
+          "value": "document/office/javascript,DOWNLOADED|executable/windows/dll64,EXTRACTED"
         }
       ]
     },
@@ -85,7 +85,7 @@
       "ancestry": [
         [
           {
-            "parent_relation": "DROPPED",
+            "parent_relation": "DOWNLOADED",
             "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
             "type": "document/office/javascript"
           },
