@@ -29,7 +29,7 @@ Depending on the capabilities we want this service to have, this will be prone c
 
 The signatures run on temporary information that the Assemblyline Dispatcher passes to the service. As such, for the time being, we've decided to format the data as pairs that include the filetype and it's relation to the parent file, if any, joined by `|`.
 
-For example: A file zip file that has an embedded PE with a RSA certificate will look like:
+For example: A OneNote file that has an embedded PE with a RSA certificate will look like:
 `document/office/onenote,ROOT|executable/windows/pe64,EXTRACTED|certificate/rsa,EXTRACTED`
 
 ## Image variants and tags
@@ -66,7 +66,7 @@ General Assemblyline documentation can be found at: https://cybercentrecanada.gi
 
 # Service Ancestry (BETA)
 
-Service Assemblyline basé sur les signatures et axé sur la généalogie des fichiers.
+Service d'Assemblyline axé sur la généalogie des fichiers basée sur les signatures.
 
 ## Détails du service
 
@@ -78,7 +78,7 @@ Service Assemblyline basé sur les signatures et axé sur la généalogie des fi
 config:
   signatures:
     exe_from_office_document: # Nom de la signature
-      pattern: « document/office/.+,ROOT\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED » # Motif Regex
+      pattern: "document/office/.+,ROOT\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED" # Motif Regex
       score: 1000 # Score associé à la signature hit
 ```
 
@@ -86,12 +86,10 @@ En fonction des capacités que nous voulons donner à ce service, ceci sera susc
 
 #### Sur quoi les signatures s'exécutent-elles ?
 
-Les signatures s'exécutent sur des informations temporaires que le répartiteur de lignes d'assemblage transmet au service. Pour l'instant, nous avons décidé de formater les données sous forme de paires comprenant le type de fichier et sa relation avec le fichier parent, s'il y en a un, joint par `|`.
+Les signatures sont exécutées sur les informations temporaires que le dispatcher d'Assemblyline transmet au service. Pour l'instant, nous avons décidé de formater les données sous forme de paires comprenant le type de fichier et sa relation avec le fichier parent, s'il y en a un, joint par `|`.
 
-Par exemple : Un fichier zip contenant un PE intégré avec un certificat RSA ressemblera à ceci :
+Par exemple : Un fichier OneNote contenant un PE avec un certificat RSA ressemblera à ceci :
 `document/office/onenote,ROOT|executable/windows/pe64,EXTRACTED|certificate/rsa,EXTRACTED`
-
-Traduit avec DeepL.com (version gratuite)
 
 ## Variantes et étiquettes d'image
 
@@ -124,7 +122,3 @@ Pour ajouter ce service à votre déploiement d'Assemblyline, suivez ceci
 ## Documentation
 
 La documentation générale sur Assemblyline peut être consultée à l'adresse suivante: https://cybercentrecanada.github.io/assemblyline4_docs/
-
-```
-
-```
