@@ -1,9 +1,10 @@
 [![Discord](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/GUAy9wErNu)
 [![](https://img.shields.io/discord/908084610158714900)](https://discord.gg/GUAy9wErNu)
 [![Static Badge](https://img.shields.io/badge/github-assemblyline-blue?logo=github)](https://github.com/CybercentreCanada/assemblyline)
-[![Static Badge](https://img.shields.io/badge/github-assemblyline\_service\_ancestry-blue?logo=github)](https://github.com/CybercentreCanada/assemblyline-service-ancestry)
+[![Static Badge](https://img.shields.io/badge/github-assemblyline_service_ancestry-blue?logo=github)](https://github.com/CybercentreCanada/assemblyline-service-ancestry)
 [![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/CybercentreCanada/assemblyline/service-ancestry)](https://github.com/CybercentreCanada/assemblyline/issues?q=is:issue+is:open+label:service-ancestry)
 [![License](https://img.shields.io/github/license/CybercentreCanada/assemblyline-service-ancestry)](./LICENSE)
+
 # Ancestry Service (BETA)
 
 Signature-based Assemblyline service that focuses on file genealogy.
@@ -67,6 +68,31 @@ General Assemblyline documentation can be found at: https://cybercentrecanada.gi
 
 Service Assemblyline basé sur les signatures et axé sur la généalogie des fichiers.
 
+## Détails du service
+
+### Signatures
+
+(BETA) Les signatures sont définies en tant que configuration de service et chaque signature suit le format suivant:
+
+```yaml
+config:
+  signatures:
+    exe_from_office_document: # Nom de la signature
+      pattern: « document/office/.+,ROOT\|executable/windows/(?:pe|dll)(?:32|64),EXTRACTED » # Motif Regex
+      score: 1000 # Score associé à la signature hit
+```
+
+En fonction des capacités que nous voulons donner à ce service, ceci sera susceptible d'être modifié lorsqu'il sera prêt pour la production.
+
+#### Sur quoi les signatures s'exécutent-elles ?
+
+Les signatures s'exécutent sur des informations temporaires que le répartiteur de lignes d'assemblage transmet au service. Pour l'instant, nous avons décidé de formater les données sous forme de paires comprenant le type de fichier et sa relation avec le fichier parent, s'il y en a un, joint par `|`.
+
+Par exemple : Un fichier zip contenant un PE intégré avec un certificat RSA ressemblera à ceci :
+`document/office/onenote,ROOT|executable/windows/pe64,EXTRACTED|certificate/rsa,EXTRACTED`
+
+Traduit avec DeepL.com (version gratuite)
+
 ## Variantes et étiquettes d'image
 
 Les services d'Assemblyline sont construits à partir de l'image de base [Assemblyline service](https://hub.docker.com/r/cccs/assemblyline-v4-service-base),
@@ -98,3 +124,7 @@ Pour ajouter ce service à votre déploiement d'Assemblyline, suivez ceci
 ## Documentation
 
 La documentation générale sur Assemblyline peut être consultée à l'adresse suivante: https://cybercentrecanada.github.io/assemblyline4_docs/
+
+```
+
+```
