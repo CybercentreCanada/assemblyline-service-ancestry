@@ -1,0 +1,116 @@
+{
+  "extra": {
+    "drop_file": false,
+    "score": 500,
+    "sections": [
+      {
+        "auto_collapse": false,
+        "body": [
+          {
+            "content": "from parent file",
+            "icon": "DOCUMENT",
+            "opposite_content": "document/office/html",
+            "score": 500,
+            "signatures": [
+              "code_from_jscript_from_office_document"
+            ],
+            "title": "EXTRACTED"
+          },
+          {
+            "content": "from url: origin unknown",
+            "icon": "CODE",
+            "opposite_content": "code/batch/document",
+            "score": 500,
+            "signatures": [
+              "code_from_jscript_from_office_document"
+            ],
+            "title": "DOWNLOADED"
+          },
+          {
+            "content": "from parent file",
+            "icon": "CODE",
+            "opposite_content": "code/batch",
+            "score": 500,
+            "signatures": [
+              "code_from_jscript_from_office_document"
+            ],
+            "title": "EXTRACTED"
+          }
+        ],
+        "body_config": {},
+        "body_format": "TIMELINE",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": {
+          "attack_ids": [],
+          "frequency": 1,
+          "heur_id": 1,
+          "score": 500,
+          "score_map": {
+            "code_from_jscript_from_office_document": 500
+          },
+          "signatures": {
+            "code_from_jscript_from_office_document": 1
+          }
+        },
+        "promote_to": null,
+        "tags": {
+          "file": {
+            "ancestry": [
+              "document/office/html,EXTRACTED|code/batch/document,DOWNLOADED|code/batch,EXTRACTED"
+            ]
+          }
+        },
+        "title_text": "HTML \u2192 DOCUMENT \u2192 BATCH",
+        "zeroize_on_tag_safe": false
+      }
+    ]
+  },
+  "files": {
+    "extracted": [],
+    "supplementary": []
+  },
+  "results": {
+    "heuristics": [
+      {
+        "attack_ids": [],
+        "heur_id": 1,
+        "signatures": [
+          "code_from_jscript_from_office_document"
+        ]
+      }
+    ],
+    "tags": {
+      "file.ancestry": [
+        {
+          "heur_id": 1,
+          "signatures": [
+            "code_from_jscript_from_office_document"
+          ],
+          "value": "document/office/html,EXTRACTED|code/batch/document,DOWNLOADED|code/batch,EXTRACTED"
+        }
+      ]
+    },
+    "temp_submission_data": {
+      "ancestry": [
+        [
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
+            "type": "document/office/html"
+          },
+          {
+            "parent_relation": "DOWNLOADED",
+            "sha256": "b9b248e46e8e2fcee1ea540e9be11748e06c3d6cbf24861978a862c444ed97a2",
+            "type": "code/batch/document"
+          },
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1541",
+            "type": "code/batch"
+          }
+        ]
+      ]
+    }
+  }
+}

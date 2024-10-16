@@ -1,0 +1,24 @@
+{
+    "task_depth": 1,
+    "temp_submission_data": {
+        "ancestry": [
+            [
+                {
+                    "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
+                    "type": "document/office/onenote",
+                    "parent_relation": "DOWNLOADED"
+                },
+                {
+                    "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1541",
+                    "type": "code/html",
+                    "parent_relation": "EXTRACTED"
+                },
+                {
+                    "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1542",
+                    "type": "archive/html",
+                    "parent_relation": "EXTRACTED"
+                }
+            ]
+        ]
+    }
+}
