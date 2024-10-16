@@ -1,6 +1,6 @@
 name: Ancestry
 version: $SERVICE_TAG
-description: This service analyzes the genealogy of a file
+description: Signature-based Assemblyline service that focuses on file genealogy.
 accepts: .*
 rejects: empty|metadata/.*|uri/.*
 
@@ -49,7 +49,7 @@ heuristics:
     heur_id: 1
     score: 0 # Score dictated by signatures
     description: "Signature hit on genealogy of current file"
-    filetype: "*"
+    filetype: ".*"
 
 docker_config:
   image: ${REGISTRY}cccs/assemblyline-service-ancestry:$SERVICE_TAG
