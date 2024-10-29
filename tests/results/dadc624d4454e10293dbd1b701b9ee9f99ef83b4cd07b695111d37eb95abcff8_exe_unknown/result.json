@@ -1,0 +1,101 @@
+{
+  "extra": {
+    "drop_file": false,
+    "score": 500,
+    "sections": [
+      {
+        "auto_collapse": false,
+        "body": [
+          {
+            "content": null,
+            "icon": "UNKNOWN",
+            "opposite_content": "unknown",
+            "score": 500,
+            "signatures": [
+              "exe_from_unknown"
+            ],
+            "title": "DROPPED"
+          },
+          {
+            "content": "from parent file",
+            "icon": "EXECUTABLE",
+            "opposite_content": "executable/windows/pe64",
+            "score": 500,
+            "signatures": [
+              "exe_from_unknown"
+            ],
+            "title": "EXTRACTED"
+          }
+        ],
+        "body_config": {},
+        "body_format": "TIMELINE",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": {
+          "attack_ids": [],
+          "frequency": 1,
+          "heur_id": 1,
+          "score": 500,
+          "score_map": {
+            "exe_from_unknown": 500
+          },
+          "signatures": {
+            "exe_from_unknown": 1
+          }
+        },
+        "promote_to": null,
+        "tags": {
+          "file": {
+            "ancestry": [
+              "unknown,DROPPED|executable/windows/pe64,EXTRACTED"
+            ]
+          }
+        },
+        "title_text": "UNKNOWN \u2192 PE64",
+        "zeroize_on_tag_safe": false
+      }
+    ]
+  },
+  "files": {
+    "extracted": [],
+    "supplementary": []
+  },
+  "results": {
+    "heuristics": [
+      {
+        "attack_ids": [],
+        "heur_id": 1,
+        "signatures": [
+          "exe_from_unknown"
+        ]
+      }
+    ],
+    "tags": {
+      "file.ancestry": [
+        {
+          "heur_id": 1,
+          "signatures": [
+            "exe_from_unknown"
+          ],
+          "value": "unknown,DROPPED|executable/windows/pe64,EXTRACTED"
+        }
+      ]
+    },
+    "temp_submission_data": {
+      "ancestry": [
+        [
+          {
+            "parent_relation": "DROPPED",
+            "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
+            "type": "unknown"
+          },
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1541",
+            "type": "executable/windows/pe64"
+          }
+        ]
+      ]
+    }
+  }
+}

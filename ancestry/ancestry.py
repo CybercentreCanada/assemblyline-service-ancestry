@@ -72,6 +72,7 @@ class Ancestry(ServiceBase):
         def add_to_section(result: Result, ancestry: list):
             chain = [AncestryNode(**ancester) for ancester in ancestry]
             tag = "|".join([str(node) for node in chain])
+
             # Workaround for caching issue
             request.set_service_context(f"Ancestry: {get_id_from_data(tag, length=SHORT)}")
 
@@ -81,9 +82,12 @@ class Ancestry(ServiceBase):
             # Iterate over detection signatures and start scoring ancestry nodes
             heur = None
             ancestry_chain = [(node.file_type, node.parent_relation) for node in chain]
+
             for sig_name, sig_details in self.config.get("signatures", {}).items():
                 signature = AncestrySignature(name=sig_name, **sig_details)
+
                 for match in re.finditer(signature.pattern, tag):
+
                     self.log.debug(f"MATCH: {signature} on {tag}")
                     match_group = match.group()
                     matched_group = tag.replace(match_group, f"**{match_group}**")
