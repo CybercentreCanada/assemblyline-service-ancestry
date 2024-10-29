@@ -1,0 +1,101 @@
+{
+  "extra": {
+    "drop_file": false,
+    "score": 500,
+    "sections": [
+      {
+        "auto_collapse": false,
+        "body": [
+          {
+            "content": "from url: origin unknown",
+            "icon": "CODE",
+            "opposite_content": "code/javascript",
+            "score": 500,
+            "signatures": [
+              "exe_from_code"
+            ],
+            "title": "DOWNLOADED"
+          },
+          {
+            "content": "from parent file",
+            "icon": "EXECUTABLE",
+            "opposite_content": "executable/windows/pe32",
+            "score": 500,
+            "signatures": [
+              "exe_from_code"
+            ],
+            "title": "EXTRACTED"
+          }
+        ],
+        "body_config": {},
+        "body_format": "TIMELINE",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": {
+          "attack_ids": [],
+          "frequency": 1,
+          "heur_id": 1,
+          "score": 500,
+          "score_map": {
+            "exe_from_code": 500
+          },
+          "signatures": {
+            "exe_from_code": 1
+          }
+        },
+        "promote_to": null,
+        "tags": {
+          "file": {
+            "ancestry": [
+              "code/javascript,DOWNLOADED|executable/windows/pe32,EXTRACTED"
+            ]
+          }
+        },
+        "title_text": "JAVASCRIPT \u2192 PE32",
+        "zeroize_on_tag_safe": false
+      }
+    ]
+  },
+  "files": {
+    "extracted": [],
+    "supplementary": []
+  },
+  "results": {
+    "heuristics": [
+      {
+        "attack_ids": [],
+        "heur_id": 1,
+        "signatures": [
+          "exe_from_code"
+        ]
+      }
+    ],
+    "tags": {
+      "file.ancestry": [
+        {
+          "heur_id": 1,
+          "signatures": [
+            "exe_from_code"
+          ],
+          "value": "code/javascript,DOWNLOADED|executable/windows/pe32,EXTRACTED"
+        }
+      ]
+    },
+    "temp_submission_data": {
+      "ancestry": [
+        [
+          {
+            "parent_relation": "DOWNLOADED",
+            "sha256": "5ff5b215aca17548a545676c6d0ab701071976f76632b4b6b2fe25dfc29d6fe9",
+            "type": "code/javascript"
+          },
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "923d223b898be2fd655bc04ba91d758ba3aaedb0a347861eaa0f856d7e2f1541",
+            "type": "executable/windows/pe32"
+          }
+        ]
+      ]
+    }
+  }
+}
