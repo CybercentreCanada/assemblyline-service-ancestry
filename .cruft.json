@@ -1,6 +1,6 @@
 {
   "template": "git@github.com:CybercentreCanada/assemblyline-service-template.git",
-  "commit": "dfed59079369f80850e7a23db722cc84fc7a2832",
+  "commit": "fb7207484332b978cc409dfc9b9c672335a8cc71",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -8,7 +8,7 @@
       "__svc_name": "ancestry",
       "__repository": "assemblyline-service-ancestry",
       "__pkg_name": "ancestry",
-      "__class_name": "Ancestry",
+      "class_name": "Ancestry",
       "short_description": "Signature-based Assemblyline service that focuses on file genealogy.",
       "short_description_fr": "Service Assemblyline basé sur les signatures et axé sur la généalogie des fichiers.",
       "stage": "REVIEW",
@@ -16,7 +16,12 @@
       "org_name_full": "CybercentreCanada",
       "org_name_short": "cccs",
       "license": "mit",
-      "_template": "git@github.com:CybercentreCanada/assemblyline-service-template.git"
+      "_extensions": [
+        "local_extensions.github_maintainer.Ext"
+      ],
+      "_template": "git@github.com:CybercentreCanada/assemblyline-service-template.git",
+      "_commit": "fb7207484332b978cc409dfc9b9c672335a8cc71",
+      "_github_maintainer": "cccs-rs"
     }
   },
   "directory": null
