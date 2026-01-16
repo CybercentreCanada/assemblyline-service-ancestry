@@ -1,7 +1,7 @@
 {
   "extra": {
     "drop_file": false,
-    "score": 500,
+    "score": 1000,
     "sections": [
       {
         "auto_collapse": false,
@@ -20,9 +20,10 @@
             "content": "from parent file",
             "icon": "HTML",
             "opposite_content": "code/html",
-            "score": 500,
+            "score": 1000,
             "signatures": [
-              "onenote_to_passwordprotected_archive"
+              "onenote_to_passwordprotected_archive",
+              "archive_from_javascript"
             ],
             "title": "EXTRACTED"
           },
@@ -30,9 +31,10 @@
             "content": "from parent file",
             "icon": "ZIP",
             "opposite_content": "archive/html",
-            "score": 500,
+            "score": 1000,
             "signatures": [
-              "onenote_to_passwordprotected_archive"
+              "onenote_to_passwordprotected_archive",
+              "archive_from_javascript"
             ],
             "title": "EXTRACTED"
           }
@@ -45,11 +47,13 @@
           "attack_ids": [],
           "frequency": 1,
           "heur_id": 1,
-          "score": 500,
+          "score": 1000,
           "score_map": {
+            "archive_from_javascript": 500,
             "onenote_to_passwordprotected_archive": 500
           },
           "signatures": {
+            "archive_from_javascript": 1,
             "onenote_to_passwordprotected_archive": 1
           }
         },
@@ -76,7 +80,8 @@
         "attack_ids": [],
         "heur_id": 1,
         "signatures": [
-          "onenote_to_passwordprotected_archive"
+          "onenote_to_passwordprotected_archive",
+          "archive_from_javascript"
         ]
       }
     ],
@@ -85,7 +90,8 @@
         {
           "heur_id": 1,
           "signatures": [
-            "onenote_to_passwordprotected_archive"
+            "onenote_to_passwordprotected_archive",
+            "archive_from_javascript"
           ],
           "value": "document/office/onenote,DOWNLOADED|code/html,EXTRACTED|archive/html,EXTRACTED"
         }
