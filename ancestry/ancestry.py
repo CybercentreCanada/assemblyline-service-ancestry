@@ -1,4 +1,5 @@
 import re
+from hashlib import sha256
 from typing import Dict, List
 
 from assemblyline.common.uid import SHORT, get_id_from_data
@@ -63,6 +64,12 @@ class AncestryNode(object):
 class Ancestry(ServiceBase):
     def __init__(self, config) -> None:
         super().__init__(config)
+        self.signature_hash = sha256(str(self.config.get("signatures", {})).encode()).hexdigest()
+
+    def get_tool_version(self):
+        # Cache invalidation should be based on the task given and the signature patterns
+        ancestry_hash = sha256(str(self._task.temp_submission_data.get("ancestry", [])).encode()).hexdigest()
+        return f'{ancestry_hash}.r{self.signature_hash}'
 
     def execute(self, request: ServiceRequest) -> None:
         result = Result()
