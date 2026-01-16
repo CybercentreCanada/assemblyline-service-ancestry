@@ -9,7 +9,6 @@ category: Static Analysis
 
 file_required: false
 timeout: 60
-disable_cache: true
 privileged: true
 
 enabled: true
