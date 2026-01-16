@@ -68,8 +68,12 @@ class Ancestry(ServiceBase):
 
     def get_tool_version(self):
         # Cache invalidation should be based on the task given and the signature patterns
-        ancestry_hash = sha256(str(self._task.temp_submission_data.get("ancestry", [])).encode()).hexdigest()
-        return f'{ancestry_hash}.r{self.signature_hash}'
+        if not self._task:
+            # Return default tool version if no task is set (only applicable at initialization)
+            return super().get_tool_version()
+        else:
+            ancestry_hash = sha256(str(self._task.temp_submission_data.get("ancestry", [])).encode()).hexdigest()
+            return f'{ancestry_hash}.r{self.signature_hash}'
 
     def execute(self, request: ServiceRequest) -> None:
         result = Result()
