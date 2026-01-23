@@ -9,11 +9,13 @@ from assemblyline_v4_service.common.task import PARENT_RELATION
 
 from ancestry.icon_map import AL_TYPE_ICON
 
+AL_TYPE_ICON_RX = {re.compile(k): v for k, v in AL_TYPE_ICON.items()}
+
 
 class AncestrySignature:
     def __init__(self, name, pattern, score=0) -> None:
         self.name = name
-        self.pattern = pattern
+        self.pattern = re.compile(pattern)
         self.score = score
 
     def __str__(self) -> str:
@@ -45,8 +47,8 @@ class AncestryNode(object):
             content = f"from url: {sha256_URL_lookup.get(self.sha256, 'origin unknown')}"
 
         # Detemine icon
-        for pattern, icon in AL_TYPE_ICON.items():
-            if re.match(pattern, self.file_type):
+        for pattern, icon in AL_TYPE_ICON_RX.items():
+            if pattern.match(self.file_type):
                 icon = icon
                 break
 
@@ -63,6 +65,10 @@ class AncestryNode(object):
 class Ancestry(ServiceBase):
     def __init__(self, config) -> None:
         super().__init__(config)
+        self.signatures = [
+            AncestrySignature(name=sig_name, **sig_details)
+            for sig_name, sig_details in self.config.get("signatures", {}).items()
+        ]
 
     def execute(self, request: ServiceRequest) -> None:
         result = Result()
@@ -82,18 +88,16 @@ class Ancestry(ServiceBase):
 
             # Iterate over detection signatures and start scoring ancestry nodes
             heur = None
-            ancestry_chain = set([(node.file_type, node.parent_relation) for node in chain])
+            ancestry_chain = set((node.file_type, node.parent_relation) for node in chain)
 
-            for sig_name, sig_details in self.config.get("signatures", {}).items():
-                signature = AncestrySignature(name=sig_name, **sig_details)
-
-                for match in re.finditer(signature.pattern, tag):
+            for signature in self.signatures:
+                for match in signature.pattern.finditer(tag):
                     self.log.debug(f"MATCH: {signature} on {tag}")
                     match_group = match.group()
                     matched_group = tag.replace(match_group, f"**{match_group}**")
 
                     # Ensure matched group is a subset of the ancestry chain
-                    match_chain = set([tuple(node.split(",")) for node in match_group.split("|")])
+                    match_chain = set(tuple(node.split(",")) for node in match_group.split("|"))
 
                     if len(ancestry_chain) > len(match_chain) and not match_chain.issubset(ancestry_chain):
                         continue
