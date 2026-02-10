@@ -1,0 +1,114 @@
+{
+  "extra": {
+    "drop_file": false,
+    "score": 500,
+    "sections": [
+      {
+        "auto_collapse": false,
+        "body": [
+          {
+            "content": null,
+            "icon": "ZIP",
+            "opposite_content": "archive/gzip",
+            "score": 0,
+            "signatures": [],
+            "title": "ROOT"
+          },
+          {
+            "content": "from parent file",
+            "icon": "DOCUMENT",
+            "opposite_content": "document/email",
+            "score": 500,
+            "signatures": [
+              "exe_from_email"
+            ],
+            "title": "EXTRACTED"
+          },
+          {
+            "content": "from parent file",
+            "icon": "EXECUTABLE",
+            "opposite_content": "executable/windows/pe32",
+            "score": 500,
+            "signatures": [
+              "exe_from_email"
+            ],
+            "title": "EXTRACTED"
+          }
+        ],
+        "body_config": {},
+        "body_format": "TIMELINE",
+        "classification": "TLP:C",
+        "depth": 0,
+        "heuristic": {
+          "attack_ids": [],
+          "frequency": 1,
+          "heur_id": 1,
+          "score": 500,
+          "score_map": {
+            "exe_from_email": 500
+          },
+          "signatures": {
+            "exe_from_email": 1
+          }
+        },
+        "promote_to": null,
+        "tags": {
+          "file": {
+            "ancestry": [
+              "archive/gzip,ROOT|document/email,EXTRACTED|executable/windows/pe32,EXTRACTED"
+            ]
+          }
+        },
+        "title_text": "GZIP \u2192 EMAIL \u2192 PE32",
+        "zeroize_on_tag_safe": false
+      }
+    ]
+  },
+  "files": {
+    "extracted": [],
+    "supplementary": []
+  },
+  "results": {
+    "heuristics": [
+      {
+        "attack_ids": [],
+        "heur_id": 1,
+        "signatures": [
+          "exe_from_email"
+        ]
+      }
+    ],
+    "tags": {
+      "file.ancestry": [
+        {
+          "heur_id": 1,
+          "signatures": [
+            "exe_from_email"
+          ],
+          "value": "archive/gzip,ROOT|document/email,EXTRACTED|executable/windows/pe32,EXTRACTED"
+        }
+      ]
+    },
+    "temp_submission_data": {
+      "ancestry": [
+        [
+          {
+            "parent_relation": "ROOT",
+            "sha256": "2bf3599db4d98969898c948a139e571fe44ec056a703f7ae5265d2ab6c1e1439",
+            "type": "archive/gzip"
+          },
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "355edc0e56ea8ae0227b46e64cbdc7a30995aaa4e38010f5033859ecbd0ca1e2",
+            "type": "document/email"
+          },
+          {
+            "parent_relation": "EXTRACTED",
+            "sha256": "f48ec0950f6d27eebc3bec823292b81d9ef2d4df1a5b80be83e3c8e7bc9f92c8",
+            "type": "executable/windows/pe32"
+          }
+        ]
+      ]
+    }
+  }
+}

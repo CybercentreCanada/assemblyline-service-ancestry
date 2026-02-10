@@ -1,0 +1,24 @@
+{
+    "task_depth": 1,
+    "temp_submission_data": {
+        "ancestry": [
+            [
+                {
+                    "sha256": "2bf3599db4d98969898c948a139e571fe44ec056a703f7ae5265d2ab6c1e1439",
+                    "type": "archive/gzip",
+                    "parent_relation": "ROOT"
+                },
+                {
+                    "sha256": "355edc0e56ea8ae0227b46e64cbdc7a30995aaa4e38010f5033859ecbd0ca1e2",
+                    "type": "document/email",
+                    "parent_relation": "EXTRACTED"
+                },
+                {
+                    "sha256": "f48ec0950f6d27eebc3bec823292b81d9ef2d4df1a5b80be83e3c8e7bc9f92c8",
+                    "type": "executable/windows/pe32",
+                    "parent_relation": "EXTRACTED"
+                }
+            ]
+        ]
+    }
+}

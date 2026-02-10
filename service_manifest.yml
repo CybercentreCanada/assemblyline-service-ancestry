@@ -43,6 +43,9 @@ config:
     archive_from_javascript:
       pattern: code/(javascript|jscript|html|hta|wsf|wsc),\w+\|archive/\w+,EXTRACTED
       score: 500
+    exe_from_email:
+      pattern: document/(office/)?email,\w+(\|[a-z0-9/]+,\w+){0,2}\|(executable/windows/(?:pe|dll)(?:32|64)|code/(ps1|batch)|shortcut/\w+),\w+
+      score: 500
 
 heuristics:
   - name: "Suspicious File Ancestry"
